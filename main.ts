@@ -1,8 +1,13 @@
 function make_coin () {
-    led.unplot(Coin_x, Coin_y)
     Coin_x = randint(0, 4)
     Coin_y = randint(0, 4)
     led.plot(Coin_x, Coin_y)
+    led.plot(X, Y)
+    for (let index = 0; index < 2; index++) {
+        basic.showString("" + (game.score()))
+        basic.clearScreen()
+        led.plot(X, Y)
+    }
 }
 input.onButtonPressed(Button.A, function () {
     if (X > 0) {
@@ -40,9 +45,11 @@ game.setScore(0)
 X = 2
 Y = 2
 led.plot(X, Y)
+make_coin()
 loops.everyInterval(500, function () {
     led.toggle(Coin_x, Coin_y)
     if (X == Coin_x && Y == Coin_y) {
         game.addScore(3)
+        make_coin()
     }
 })
