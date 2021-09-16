@@ -41,7 +41,9 @@ let Coin_y = 0
 let Coin_x = 0
 let Y = 0
 let X = 0
+let Timer = 0
 game.setScore(0)
+game.setLife(3)
 X = 2
 Y = 2
 led.plot(X, Y)
@@ -50,6 +52,12 @@ loops.everyInterval(500, function () {
     led.toggle(Coin_x, Coin_y)
     if (X == Coin_x && Y == Coin_y) {
         game.addScore(3)
+        Timer = 0
         make_coin()
+    }
+    Timer += 0.5
+    if (Timer >= 10) {
+        game.removeLife(1)
+        Timer = 0
     }
 })
